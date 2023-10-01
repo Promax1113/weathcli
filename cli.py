@@ -24,7 +24,7 @@ console.print(f"[green]Current temperature: {current_temp}°C")
 console.print(f"[blue]Min temperature: {min_temp}°C")
 
 while True:
-    if keyboard.is_pressed('esc'):
+    if keyboard.is_pressed('q'):
         choices = ['Search for city', 'Your city', 'Exit']
         choice = inquirer.prompt([
             inquirer.List("main_menu",message='\nChoose from list', choices=choices)
