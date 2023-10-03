@@ -17,7 +17,10 @@ else:
 weather_api = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly=temperature_2m"
 weather_response = requests.get(weather_api)
 
-if weather_response.status_code != 200:
-    print(weather_response.status_code)
+if weather_response.status_code == 200:
+    print(weather_response.json())
+
+else:
+    print(f"error:{weather_response.status_code}")
 
 
