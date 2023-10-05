@@ -11,20 +11,22 @@ def get_location():
         longitude = response.json()["longitude"]
         latitude =  response.json()["latitude"]
 
-        coordinates = {"longitude" : longitude , "latitude" : latitude, "city": response.json()['city']}
+        return {"longitude" : longitude , "latitude" : latitude, "city": response.json()['city']}
 
     else:
-        print(f"error{response.status_code}")
+        print('\nToo many requests!\n')
+        exit(0)
     
-    return coordinates
 
-def weather_info():
-    location = get_location() 
 
-    longitude = location["longitude"]
-
-    latitude = location["latitude"]
-
+def weather_info(coordinates: dict = None):
+    if not coordinates:
+        location = get_location() 
+        longitude = location["longitude"]
+        latitude = location["latitude"]
+    else:
+        longitude = coordinates['longitude']
+        latitude = coordinates['latitude']
     weather_api = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
 
     weather_response = requests.get(weather_api)
@@ -33,7 +35,8 @@ def weather_info():
         return weather_response.json()
  
     else:
-        print(f"error: {weather_response.status_code}")
+        print('\nToo many requests!\n')
+        exit(0)
     
     
 
