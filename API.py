@@ -11,7 +11,7 @@ def get_location():
         longitude = response.json()["longitude"]
         latitude =  response.json()["latitude"]
 
-        coordinates = {"longitude" : longitude , "latitude" : latitude}
+        coordinates = {"longitude" : longitude , "latitude" : latitude, "city": response.json()['city']}
 
     else:
         print(f"error{response.status_code}")
@@ -25,21 +25,17 @@ def weather_info():
 
     latitude = location["latitude"]
 
-    weather_api = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly=temperature_2m"
+    weather_api = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
 
     weather_response = requests.get(weather_api)
 
     if weather_response.status_code == 200:
-        print(weather_response.json())
+        return weather_response.json()
  
     else:
         print(f"error: {weather_response.status_code}")
     
-    return weather_info
-
-print(get_location())
-
-#print(weather_info())
+    
 
 
 
