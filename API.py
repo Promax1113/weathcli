@@ -14,7 +14,7 @@ def get_location():
         return {"longitude" : longitude , "latitude" : latitude, "city": response.json()['city']}
 
     else:
-        print('\nToo many requests!\n')
+        print('\nToo many Location requests!\n')
         exit(0)
     
 
@@ -35,7 +35,7 @@ def weather_info(coordinates: dict = None):
         return weather_response.json()
  
     else:
-        print('\nToo many requests!\n')
+        print('\nToo many weather requests!\n')
         exit(0)
     
     

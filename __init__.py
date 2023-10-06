@@ -11,9 +11,11 @@ if not os.path.isfile(f"{os.getcwd()}/loc_cache/loc.tmp"):
     with open(f"{os.getcwd()}/loc_cache/loc.tmp", "w") as f:
         coords = get_location()
         f.write(json.dumps(coords))
+        city = coords['city']
         w_info = weather_info(coords)
 else:
-    if os.path.getmtime(f"{os.getcwd()}/loc_cache/loc.tmp") + 1000 < time.time():
+    if os.path.getmtime(f"{os.getcwd()}/loc_cache/loc.tmp") + 10000 < time.time():
+        
         coords = get_location()
         with open(f"{os.getcwd()}/loc_cache/loc.tmp", 'w') as f:
             f.write(json.dumps(coords))
@@ -21,6 +23,7 @@ else:
     else:
         with open(f"{os.getcwd()}/loc_cache/loc.tmp") as f:
             data = f.readline()
+            city = json.loads(data)['city']
             w_info = weather_info(json.loads(data))
             is_cached = True
 
@@ -29,19 +32,5 @@ else:
 
 
 
-console.print(f'[bold]Weather in {get_location["city"]}(cached: {is_cached}):', justify='center')
+console.print(f'[bold]Weather in {city} (cached: {is_cached}):', justify='center')
 console.print(f"[green]Current temperature: {w_info['current_weather']['temperature']}°C")
-
-while True:
-    if keyboard.is_pressed('q'):
-        choices = ['Search for city', 'Your city', 'Exit']
-        choice = inquirer.prompt([
-            inquirer.List("main_menu",message='\nChoose from list', choices=choices)
-        ])
-        match choice['main_menu']:
-            case 'Search for city':
-                pass
-            case 'Your city':
-                pass
-            case 'Exit':
-                exit(0)
