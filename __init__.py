@@ -1,7 +1,6 @@
 import os
 
 import json
-import keyboard
 import time
 from rich.console import Console
 
