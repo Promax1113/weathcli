@@ -1,6 +1,6 @@
 # Weather CLI
 
-This is a Command Line Interface or CLI that displays the weather. Along with many APIs and a caching system for location it also uses Rich for formatting.
+This is a Command-Line Interface (CLI) that displays the weather. It uses Rich for formatting and many APIs, as well as a location caching system.
 
 ## Collaborators
 
